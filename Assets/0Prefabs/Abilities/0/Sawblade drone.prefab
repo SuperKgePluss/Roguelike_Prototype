@@ -129,6 +129,7 @@ MonoBehaviour:
   rotateSpeed: 90
   damage: 50
   lifeTime: 15
+  owner: {fileID: 5696466937904132017}
 --- !u!114 &5696466937904132017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d464ba8b26b61c24b9500b9d4ccac3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   followOwner: 1
 --- !u!1001 &36293150024787213
 PrefabInstance:

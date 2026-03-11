@@ -164,6 +164,9 @@ MonoBehaviour:
   level: 1
   currentExp: 0
   expToNext: 10
+  SquadSpawnLevel2nd: 3
+  SquadSpawnLevel3rd: 5
+  SquadSpawnLevel4th: 7
 --- !u!114 &8278415367676307716
 MonoBehaviour:
   m_ObjectHideFlags: 0

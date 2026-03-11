@@ -52,7 +52,7 @@ namespace CrystalMind
 
             UpdateEXP(currentExp);
 
-            expToNext += 5;
+            expToNext += 10;
 
             Debug.Log("LEVEL UP : " + level);
 

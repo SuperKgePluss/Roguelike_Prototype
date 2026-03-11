@@ -10,11 +10,13 @@ namespace CrystalMind
 
         public float lifeTime = 5f;
 
+        [SerializeField] private AbilityPosition owner;        
+
         Transform center;
 
         void Start()
         {
-            center = transform.parent;
+            center = owner.transform;
 
             if (center != null)
             {

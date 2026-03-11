@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AbilityPosition : MonoBehaviour
 {
-    Transform owner;
+    public Transform owner;
 
     public bool followOwner = false;
 
