@@ -1,34 +1,40 @@
 using UnityEngine;
 
-public class ProjectileAbility : MonoBehaviour
+namespace CrystalMind
 {
-    public float speed = 15f;
-    public int damage = 5;
-
-    Transform owner;
-
-    public void SetOwner(Transform t)
+    public class ProjectileAbility : MonoBehaviour
     {
-        owner = t;
+        public float speed = 15f;
+        public int damage = 5;
 
-        transform.position =
-            owner.position + owner.forward * 1.2f;
+        public float lifeTime = 5f;
+        //Transform owner;
 
-        transform.rotation = owner.rotation;
-    }
+        //public void SetOwner(Transform t)
+        //{
+        //    owner = t;
 
-    void Update()
-    {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
+        //    transform.position =
+        //        owner.position + owner.forward * 1.2f;
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
+        //    transform.rotation = owner.rotation;
+        //}
+
+
+
+        void Update()
         {
-            other.GetComponent<Enemy>().TakeDamage(damage);
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
 
-            Destroy(gameObject);
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                other.GetComponent<Enemy>().TakeDamage(damage);
+
+                Destroy(gameObject);
+            }
         }
     }
 }

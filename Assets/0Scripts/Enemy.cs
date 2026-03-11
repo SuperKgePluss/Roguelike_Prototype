@@ -1,150 +1,175 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+namespace CrystalMind
 {
-    public EnemyType enemyType;
-    public float moveSpeed = 3f;
-    public int health = 1;
-    public GameObject expPrefab;
-    public GameObject healPrefab;
-    public GameObject magnetPrefab;
-
-    public bool isBoss = false;
-    public GameObject bossBullet;
-    public float shootCooldown = 2f;
-
-    public AudioClip deathSFX;
-
-    private Transform player;
-    float shootTimer;
-
-    public enum EnemyType
+    public class Enemy : MonoBehaviour
     {
-        Basic,
-        Runner,
-        Spitter,
-        Elite
-    }
+        public EnemyType enemyType;
+        public float moveSpeed = 3f;
+        public int health = 1;
+        public GameObject expPrefab;
+        public GameObject healPrefab;
+        public GameObject magnetPrefab;
 
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        public bool isBoss = false;
+        public int damage = 1;
+        public GameObject bossBullet;
+        public float shootCooldown = 2f;
 
-        SetupEnemy();
-    }
+        public AudioClip deathSFX;
 
-    void Update()
-    {
-        if (player != null)
+        private Transform leader;
+        float shootTimer;
+
+        Transform targetPlayer;
+        PlayerHealth leaderHealth;
+
+        float stunTimer = 0f;
+
+        public enum EnemyType
         {
-            Vector3 direction = player.position - transform.position;
-            direction.y = 0;
-
-            transform.rotation = Quaternion.LookRotation(direction);
-
-            transform.position += direction.normalized * moveSpeed * Time.deltaTime;
+            Basic,
+            Runner,
+            Spitter,
+            Elite
         }
 
-        if (isBoss)
+        void Start()
         {
-            shootTimer += Time.deltaTime;
+            leader = GameObject.FindGameObjectWithTag("Player").transform;
+            leaderHealth = leader.GetComponent<PlayerHealth>();
 
-            if (shootTimer >= shootCooldown)
+            PlayerHealth[] allPlayer = FindObjectsOfType<PlayerHealth>();
+            targetPlayer = allPlayer[Random.Range(0, allPlayer.Length - 1)].transform;
+
+            SetupEnemy();
+        }
+
+        void Update()
+        {
+            if (stunTimer > 0)
             {
-                shootTimer = 0;
-                ShootRadial();
+                stunTimer -= Time.deltaTime;
+                return;
+            }
+
+            if (targetPlayer != null)
+            {
+                Vector3 direction = targetPlayer.position - transform.position;
+                direction.y = 0;
+
+                transform.rotation = Quaternion.LookRotation(direction);
+
+                transform.position += direction.normalized * moveSpeed * Time.deltaTime;
+            }
+
+            if (isBoss)
+            {
+                shootTimer += Time.deltaTime;
+
+                if (shootTimer >= shootCooldown)
+                {
+                    shootTimer = 0;
+                    ShootRadial();
+                }
             }
         }
-    }
 
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-
-        float r = UnityEngine.Random.value;
-
-        if (health <= 0)
+        public void Stun(float time)
         {
-            if (r < 0.7f)
+            if (time > stunTimer)
             {
-                Instantiate(expPrefab, transform.position, Quaternion.identity);
+                stunTimer = time;
             }
-            else if (r < 0.9f)
-            {
-                Instantiate(healPrefab, transform.position, Quaternion.identity);
-            }
-            else
-            {
-                Instantiate(magnetPrefab, transform.position, Quaternion.identity);
-            }
-
-            if (deathSFX != null)
-            {
-                AudioSource.PlayClipAtPoint(
-                deathSFX,
-                transform.position
-                );
-            }
-
-            GameManager.instance.AddScore(1);
-
-            Destroy(gameObject);
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        public void TakeDamage(int damage)
         {
-            PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+            health -= damage;
 
-            if (playerHealth != null)
+            float r = UnityEngine.Random.value;
+
+            if (health <= 0)
             {
-                playerHealth.TakeDamage(1);
+                if (r < 0.7f)
+                {
+                    Instantiate(expPrefab, transform.position, Quaternion.identity);
+                }
+                else if (r < 0.9f)
+                {
+                    Instantiate(healPrefab, transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(magnetPrefab, transform.position, Quaternion.identity);
+                }
+
+                if (deathSFX != null)
+                {
+                    AudioSource.PlayClipAtPoint(
+                    deathSFX,
+                    transform.position
+                    );
+                }
+
+                GameManager.instance.AddScore(1);
+
                 Destroy(gameObject);
             }
         }
-    }
 
-    void SetupEnemy()
-    {
-        switch (enemyType)
+        private void OnTriggerEnter(Collider other)
         {
-        case EnemyType.Basic:
-        moveSpeed = 3f;
-        health = 3;
-        break;
-
-        case EnemyType.Runner:
-        moveSpeed = 6f;
-        health = 1;
-        break;
-
-        case EnemyType.Spitter:
-        moveSpeed = 2f;
-        health = 3;
-        break;
-
-        case EnemyType.Elite:
-        moveSpeed = 2f;
-        health = 10;
-        break;
+            if (other.CompareTag("Player") || other.CompareTag("Ally"))
+            {
+                if (leaderHealth != null)
+                {
+                    leaderHealth.TakeDamage(damage);
+                    Destroy(gameObject);
+                }
+            }
         }
-    }
 
-    void ShootRadial()
-    {
-        for (int i = 0; i < 8; i++)
+        void SetupEnemy()
         {
-            float angle = i * 45f;
+            switch (enemyType)
+            {
+            case EnemyType.Basic:
+            moveSpeed = 3f;
+            health = 3;
+            break;
 
-            Vector3 dir = Quaternion.Euler(0, angle, 0) * Vector3.forward;
+            case EnemyType.Runner:
+            moveSpeed = 6f;
+            health = 1;
+            break;
 
-            Instantiate(
-                bossBullet,
-                transform.position,
-                Quaternion.LookRotation(dir)
-            );
+            case EnemyType.Spitter:
+            moveSpeed = 2f;
+            health = 3;
+            break;
+
+            case EnemyType.Elite:
+            moveSpeed = 2f;
+            health = 10;
+            break;
+            }
+        }
+
+        void ShootRadial()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                float angle = i * 45f;
+
+                Vector3 dir = Quaternion.Euler(0, angle, 0) * Vector3.forward;
+
+                Instantiate(
+                    bossBullet,
+                    transform.position,
+                    Quaternion.LookRotation(dir)
+                );
+            }
         }
     }
 }

@@ -1,15 +1,18 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CharacterData", menuName = "Game/Character")]
-public class CharacterData : ScriptableObject
+namespace CrystalMind
 {
-    public string characterName;
+    [CreateAssetMenu(fileName = "CharacterData", menuName = "Game/Character")]
+    public class CharacterData : ScriptableObject
+    {
+        public string characterName;
 
-    public float moveSpeed;
+        public float moveSpeed;
 
-    public int maxHP;
+        public int maxHP;
 
-    public float fireRate;
+        public float fireRate;
 
-    public Color characterColor;
+        public Color characterColor;
+    }
 }

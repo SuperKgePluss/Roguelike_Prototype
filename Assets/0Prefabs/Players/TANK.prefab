@@ -60,6 +60,18 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 13701946, guid: 3f5c2682da7630b45a917fbf757d4641, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 45933eeafd9997b449b17b162bcc458d, type: 2}
+    - target: {fileID: 13754750, guid: 3f5c2682da7630b45a917fbf757d4641, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 45933eeafd9997b449b17b162bcc458d, type: 2}
+    - target: {fileID: 13763238, guid: 3f5c2682da7630b45a917fbf757d4641, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 45933eeafd9997b449b17b162bcc458d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -79,12 +91,48 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1182198053619241804, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
+      propertyPath: range
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182198053619241804, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
+      propertyPath: attack
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182198053619241804, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
+      propertyPath: fireRate
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182198053619241804, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
       propertyPath: shootSFX
       value: 
       objectReference: {fileID: 8300000, guid: 1df1429981f76644097c7fd47fc5f239, type: 3}
+    - target: {fileID: 1182198053619241804, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 892112271917318241, guid: 0fa2cff92aceae740a82097abfc46086, type: 3}
     - target: {fileID: 1222783578375379269, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
       propertyPath: m_Name
       value: TANK
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762498727119172883, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
+      propertyPath: offset.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762498727119172883, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
+      propertyPath: offset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762498727119172883, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
+      propertyPath: offset.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762498727119172883, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
+      propertyPath: followSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3733546027981270102, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
+      propertyPath: moveSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4207718677488231177, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
       propertyPath: spawnVO

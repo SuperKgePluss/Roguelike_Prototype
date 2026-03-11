@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\_Work\\_Unity6Games\\Roguelike_Prototype\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{26BE5D0F-E2E9-1284-03E6-639962A13C3C}|Assembly-CSharp.csproj|e:\\_work\\_unity6games\\roguelike_prototype\\assets\\0scripts\\ability\\0\\orbitability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26BE5D0F-E2E9-1284-03E6-639962A13C3C}|Assembly-CSharp.csproj|solutionrelative:assets\\0scripts\\ability\\0\\orbitability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26BE5D0F-E2E9-1284-03E6-639962A13C3C}|Assembly-CSharp.csproj|E:\\_Work\\_Unity6Games\\Roguelike_Prototype\\assets\\0scripts\\ability\\0\\projectileability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26BE5D0F-E2E9-1284-03E6-639962A13C3C}|Assembly-CSharp.csproj|solutionrelative:assets\\0scripts\\ability\\0\\projectileability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26BE5D0F-E2E9-1284-03E6-639962A13C3C}|Assembly-CSharp.csproj|E:\\_Work\\_Unity6Games\\Roguelike_Prototype\\assets\\0scripts\\ability\\0\\aoeability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26BE5D0F-E2E9-1284-03E6-639962A13C3C}|Assembly-CSharp.csproj|solutionrelative:assets\\0scripts\\ability\\0\\aoeability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26BE5D0F-E2E9-1284-03E6-639962A13C3C}|Assembly-CSharp.csproj|E:\\_Work\\_Unity6Games\\Roguelike_Prototype\\assets\\0scripts\\ability\\0\\trapability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26BE5D0F-E2E9-1284-03E6-639962A13C3C}|Assembly-CSharp.csproj|solutionrelative:assets\\0scripts\\ability\\0\\trapability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrbitAbility.cs",
+              "DocumentMoniker": "E:\\_Work\\_Unity6Games\\Roguelike_Prototype\\Assets\\0Scripts\\Ability\\0\\OrbitAbility.cs",
+              "RelativeDocumentMoniker": "Assets\\0Scripts\\Ability\\0\\OrbitAbility.cs",
+              "ToolTip": "E:\\_Work\\_Unity6Games\\Roguelike_Prototype\\Assets\\0Scripts\\Ability\\0\\OrbitAbility.cs",
+              "RelativeToolTip": "Assets\\0Scripts\\Ability\\0\\OrbitAbility.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-11T15:05:21.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TrapAbility.cs",
+              "DocumentMoniker": "E:\\_Work\\_Unity6Games\\Roguelike_Prototype\\Assets\\0Scripts\\Ability\\0\\TrapAbility.cs",
+              "RelativeDocumentMoniker": "Assets\\0Scripts\\Ability\\0\\TrapAbility.cs",
+              "ToolTip": "E:\\_Work\\_Unity6Games\\Roguelike_Prototype\\Assets\\0Scripts\\Ability\\0\\TrapAbility.cs",
+              "RelativeToolTip": "Assets\\0Scripts\\Ability\\0\\TrapAbility.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-11T13:02:38.222Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AOEAbility.cs",
+              "DocumentMoniker": "E:\\_Work\\_Unity6Games\\Roguelike_Prototype\\Assets\\0Scripts\\Ability\\0\\AOEAbility.cs",
+              "RelativeDocumentMoniker": "Assets\\0Scripts\\Ability\\0\\AOEAbility.cs",
+              "ToolTip": "E:\\_Work\\_Unity6Games\\Roguelike_Prototype\\Assets\\0Scripts\\Ability\\0\\AOEAbility.cs",
+              "RelativeToolTip": "Assets\\0Scripts\\Ability\\0\\AOEAbility.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-11T13:02:49.903Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProjectileAbility.cs",
+              "DocumentMoniker": "E:\\_Work\\_Unity6Games\\Roguelike_Prototype\\Assets\\0Scripts\\Ability\\0\\ProjectileAbility.cs",
+              "RelativeDocumentMoniker": "Assets\\0Scripts\\Ability\\0\\ProjectileAbility.cs",
+              "ToolTip": "E:\\_Work\\_Unity6Games\\Roguelike_Prototype\\Assets\\0Scripts\\Ability\\0\\ProjectileAbility.cs",
+              "RelativeToolTip": "Assets\\0Scripts\\Ability\\0\\ProjectileAbility.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-11T13:03:01.257Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

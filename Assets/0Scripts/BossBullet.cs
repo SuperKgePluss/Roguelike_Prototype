@@ -1,33 +1,40 @@
 using UnityEngine;
 
-public class BossBullet : MonoBehaviour
+namespace CrystalMind
 {
-    public float speed = 6f;
-    public float lifeTime = 5f;
-    public int damage = 1;
-
-    void Start()
+    public class BossBullet : MonoBehaviour
     {
-        Destroy(gameObject, lifeTime);
-    }
+        public float speed = 6f;
+        public float lifeTime = 5f;
+        public int damage = 1;
 
-    void Update()
-    {
-        transform.position += transform.forward * speed * Time.deltaTime;
-    }
+        PlayerHealth leaderHP;
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        void Start()
         {
-            PlayerHealth ph = other.GetComponent<PlayerHealth>();
+            leaderHP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
 
-            if (ph != null)
+            Destroy(gameObject, lifeTime);
+        }
+
+        void Update()
+        {
+            transform.position += transform.forward * speed * Time.deltaTime;
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player") || other.CompareTag("Ally"))
             {
-                ph.TakeDamage(damage);
-            }
+                //PlayerHealth ph = other.GetComponent<PlayerHealth>();
 
-            Destroy(gameObject);
+                if (leaderHP != null)
+                {
+                    leaderHP.TakeDamage(damage);
+                }
+
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -13,8 +13,12 @@ PrefabInstance:
       value: Enemy Runner
       objectReference: {fileID: 0}
     - target: {fileID: 595867772017348018, guid: 83d002895e21eb9498fa4b4c387ba02d, type: 3}
+      propertyPath: damage
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 595867772017348018, guid: 83d002895e21eb9498fa4b4c387ba02d, type: 3}
       propertyPath: health
-      value: 3
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 595867772017348018, guid: 83d002895e21eb9498fa4b4c387ba02d, type: 3}
       propertyPath: deathSFX
@@ -26,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 595867772017348018, guid: 83d002895e21eb9498fa4b4c387ba02d, type: 3}
       propertyPath: moveSpeed
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1153211736727569570, guid: 83d002895e21eb9498fa4b4c387ba02d, type: 3}
       propertyPath: m_LocalPosition.x

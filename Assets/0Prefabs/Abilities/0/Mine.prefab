@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8069280173115512559}
   - component: {fileID: 5348746247849343136}
   - component: {fileID: 1240034160242458840}
+  - component: {fileID: -6592794469659395128}
   m_Layer: 0
   m_Name: Mine
   m_TagString: Untagged
@@ -122,7 +123,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533e9be2ef891c141abdcf0be722c8b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 200
+  isStun: 0
+  lifeTime: 10
+--- !u!114 &-6592794469659395128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379545820284068020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d464ba8b26b61c24b9500b9d4ccac3d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followOwner: 0
 --- !u!1001 &8924235165161062106
 PrefabInstance:
   m_ObjectHideFlags: 0

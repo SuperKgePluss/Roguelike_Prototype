@@ -1,16 +1,33 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class TrapAbility : MonoBehaviour
+namespace CrystalMind
 {
-    public int damage = 5;
-
-    void OnTriggerEnter(Collider other)
+    public class TrapAbility : MonoBehaviour
     {
-        if (other.CompareTag("Enemy"))
-        {
-            other.GetComponent<Enemy>().TakeDamage(damage);
+        public int damage = 5;
+        public bool isStun = false;
 
-            Destroy(gameObject);
+        public float lifeTime = 3f;
+
+        private void Start()
+        {
+            Destroy(gameObject, lifeTime);
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                var enemy = other.GetComponent<Enemy>();
+                enemy.TakeDamage(damage);
+                if (isStun)
+                {
+                    enemy.Stun(1.5f);
+                }
+
+                Destroy(gameObject);
+            }
         }
     }
 }

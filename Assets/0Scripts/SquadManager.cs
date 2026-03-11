@@ -1,46 +1,55 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class SquadManager : MonoBehaviour
+namespace CrystalMind
 {
-    public GameObject[] squadPrefabs;
-
-    public Transform leader;
-    public List<GameObject> availableSquads;
-
-    void Start()
+    public class SquadManager : MonoBehaviour
     {
-        availableSquads = new List<GameObject>(squadPrefabs);
-    }
+        public GameObject[] squadPrefabs;
 
-    public void SpawnMember(Vector3 offset)
-    {
-        if (availableSquads.Count == 0) return;
+        public Transform leader;
+        public List<GameObject> availableSquads;
 
-        GameObject prefab =
-            availableSquads[Random.Range(0, availableSquads.Count)];
+        void Start()
+        {
+            availableSquads = new List<GameObject>(squadPrefabs);
+        }
 
-        GameObject member = Instantiate(
-            prefab,
-            leader.position + offset,
-            Quaternion.identity
-        );
+        public void SpawnMember(Vector3 offset)
+        {
+            if (availableSquads.Count == 0) return;
 
-        availableSquads.Remove(prefab);
+            GameObject prefab =
+                availableSquads[Random.Range(0, availableSquads.Count)];
 
-        member.tag = "Ally";
+            GameObject member = Instantiate(
+                prefab,
+                leader.position + offset,
+                Quaternion.identity
+            );
 
-        SquadFollower follower = member.GetComponent<SquadFollower>();
-        follower.leader = leader;
-        follower.offset = offset;
+            availableSquads.Remove(prefab);
 
-        member.GetComponent<PlayerMovement>().enabled = false;
-        member.GetComponent<PlayerLevel>().enabled = false;
-        member.GetComponent<CharacterLoader>().enabled = false;
-    }
+            member.tag = "Ally";
 
-    public void RemoveLeader(GameObject leaderPrefab)
-    {
-        availableSquads.Remove(leaderPrefab);
+            SquadFollower follower = member.GetComponent<SquadFollower>();
+            follower.leader = leader;
+            follower.offset = offset;
+
+            var leaderHP = leader.GetComponent<PlayerHealth>();
+            var newFollowerHP = follower.GetComponent<PlayerHealth>();
+
+            leaderHP.maxHealth += 400;
+            leaderHP.Heal(400);
+
+            member.GetComponent<PlayerMovement>().enabled = false;
+            member.GetComponent<PlayerLevel>().enabled = false;
+            member.GetComponent<CharacterLoader>().enabled = false;
+        }
+
+        public void RemoveLeader(GameObject leaderPrefab)
+        {
+            availableSquads.Remove(leaderPrefab);
+        }
     }
 }

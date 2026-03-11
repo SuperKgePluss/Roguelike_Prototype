@@ -1,37 +1,53 @@
 using UnityEngine;
 
-public class OrbitAbility : MonoBehaviour
+namespace CrystalMind
 {
-    Transform owner;
-
-    public float radius = 2f;
-    public float speed = 180f;
-
-    float angle;
-
-    public void SetOwner(Transform t)
+    public class OrbitAbility : MonoBehaviour
     {
-        owner = t;
-    }
+        public float radius = 2f;
+        public float rotateSpeed = 180f;
+        public int damage = 100;
 
-    void Update()
-    {
-        if (owner == null) return;
+        public float lifeTime = 5f;
 
-        angle += speed * Time.deltaTime;
+        Transform center;
 
-        float x = Mathf.Cos(angle) * radius;
-        float z = Mathf.Sin(angle) * radius;
-
-        transform.position =
-            owner.position + new Vector3(x, 0, z);
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
+        void Start()
         {
-            other.GetComponent<Enemy>().TakeDamage(1);
+            center = transform.parent;
+
+            if (center != null)
+            {
+                transform.position =
+                    center.position + transform.right * radius;
+            }
+
+            Destroy(gameObject, lifeTime);
+        }
+
+        void Update()
+        {
+            if (center == null) return;
+
+            transform.RotateAround(
+                center.position,
+                Vector3.up,
+                rotateSpeed * Time.deltaTime
+            );
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                other.GetComponent<Enemy>().TakeDamage(damage);
+            }
+        }
+
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, radius);
         }
     }
 }

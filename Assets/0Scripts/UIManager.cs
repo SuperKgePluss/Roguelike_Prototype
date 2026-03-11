@@ -1,88 +1,137 @@
 using UnityEngine;
 using TMPro;
-using System.Collections;
+using System.Collections.Generic;
 
-public class UIManager : MonoBehaviour
+namespace CrystalMind
 {
-    public static UIManager _instance;
-
-    public TextMeshProUGUI hpText;
-    public TextMeshProUGUI eXPText;
-    public TextMeshProUGUI waveText;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI levelText;
-    public GameObject gameOverText;
-
-    public GameObject upgradePanel;
-
-    public GameObject bossWarningImage;
-
-    void Awake()
+    public class UIManager : MonoBehaviour
     {
-        _instance = this;
-    }
+        public static UIManager _instance;
 
-    void Start()
-    {
-        gameOverText.SetActive(false);
-    }
+        [Header("GameState")]
+        public GameObject GameOverPanel;
+        public TextMeshProUGUI scoreText;
+        public TextMeshProUGUI timeText;
+        public TextMeshProUGUI waveText;
+        public GameObject bossIncoming;
 
-    public void UpdateHP(int hp)
-    {
-        hpText.text = $"HP : {hp}";
-    }
+        [Header("Player UI")]
+        public TextMeshProUGUI hpText;
+        public TextMeshProUGUI levelText;
+        public TextMeshProUGUI expText;
 
-    public void UpdateEXP(int exp)
-    {
-        eXPText.text = $"EXP : {exp}";
-    }
+        [Header("Upgrade UI")]
+        public GameObject upgradePanel;
 
-    public void UpdateLV(int level)
-    {
-        levelText.text = $"LV : {level}";
-    }
+        public UpgradeButtonUI[] upgradeButtons;
 
-    public void ShowGameOver()
-    {
-        gameOverText.SetActive(true);
-    }
+        void Awake()
+        {
+            _instance = this;
 
-    public void UpdateScore(int score)
-    {
-        scoreText.text = "Score : " + score;
-    }
+            if (upgradePanel != null)
+                upgradePanel.SetActive(false);
+        }
 
-    public void UpdateWave(int wave)
-    {
-        waveText.text = $"Wave : {wave}";
-    }
+        private void Update()
+        {
+            if (timeText != null)
+            {
+                int totalSeconds = (int)Time.time;
 
-    public void ShowWaveComplete(int wave)
-    {
-        StartCoroutine(WaveCompleteRoutine(wave));
-    }
+                int minutes = totalSeconds / 60;
+                int seconds = totalSeconds % 60;
 
-    public void ShowBossWarning(bool show)
-    {
-        bossWarningImage.SetActive(show);
-    }
+                timeText.text = "Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
+            }
+        }
 
-    IEnumerator WaveCompleteRoutine(int wave)
-    {
-        waveText.text = $"Wave {wave} Complete!";
+        // -------------------------
+        // HP
+        // -------------------------
 
-        yield return new WaitForSeconds(2f);
+        public void UpdateHP(float current, float max)
+        {
+            if (hpText != null)
+            {
+                hpText.text = "HP : " + current + " / " + max;
+            }
+        }
 
-        waveText.text = $"Wave : {wave + 1}";
-    }
+        // -------------------------
+        // EXP
+        // -------------------------
 
-    public void ShowUpgradeUI()
-    {
-        upgradePanel.SetActive(true);
-    }
+        public void UpdateEXP(int exp)
+        {
+            if (expText != null)
+            {
+                expText.text = "EXP : " + exp;
+            }
+        }
 
-    public void HideUpgradeUI()
-    {
-        upgradePanel.SetActive(false);
+        // -------------------------
+        // LEVEL
+        // -------------------------
+
+        public void UpdateLV(int level)
+        {
+            if (levelText != null)
+            {
+                levelText.text = "LV : " + level;
+            }
+        }
+
+        // -------------------------
+        // UPGRADE UI
+        // -------------------------
+
+        public void ShowUpgradeUI(List<UpgradeOption> choices)
+        {
+            if (upgradePanel == null)
+                return;
+
+            upgradePanel.SetActive(true);
+
+            for (int i = 0; i < upgradeButtons.Length; i++)
+            {
+                if (i < choices.Count)
+                {
+                    upgradeButtons[i].gameObject.SetActive(true);
+
+                    upgradeButtons[i].Setup(choices[i], i);
+                }
+                else
+                {
+                    upgradeButtons[i].gameObject.SetActive(false);
+                }
+            }
+        }
+
+        public void UpdateScore(int score)
+        {
+            scoreText.text = "SCORE: " + score;
+        }
+
+        public void UpdateWave(int wave)
+        {
+            waveText.text = "WAVE: " + wave;
+        }
+
+        public void ShowBossWarning(bool isEnable)
+        {
+            bossIncoming.SetActive(isEnable);
+        }
+
+        public void HideUpgradeUI()
+        {
+            if (upgradePanel != null)
+                upgradePanel.SetActive(false);
+        }
+
+        public void ShowGameOver()
+        {
+            GameOverPanel.SetActive(true);
+        }
     }
 }

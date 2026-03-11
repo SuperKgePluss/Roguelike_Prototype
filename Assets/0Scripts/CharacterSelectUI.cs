@@ -2,53 +2,60 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CharacterSelectUI : MonoBehaviour
+namespace CrystalMind
 {
-    public GameObject swat;
-    public GameObject tank;
-    public GameObject engineer;
-    public GameObject hunter;
-
-    public TextMeshProUGUI highScoreText;
-
-    private void Start()
+    public class CharacterSelectUI : MonoBehaviour
     {
-        SaveManager save = FindObjectOfType<SaveManager>();
+        public GameObject swat;
+        public GameObject tank;
+        public GameObject engineer;
+        public GameObject hunter;
 
-        int bestScore = save.LoadScore();
-        highScoreText.text = "Best score : " + bestScore.ToString();
-    }
+        public TextMeshProUGUI highScoreText;
 
-    public void SelectSWAT()
-    {
-        CharacterManager.instance.SelectCharacter(swat);
-        StartGame();
-    }
+        private void Start()
+        {
+            SaveManager save = FindObjectOfType<SaveManager>();
 
-    public void SelectTANK()
-    {
-        CharacterManager.instance.SelectCharacter(tank);
-        StartGame();
-    }
+            int bestScore = save.LoadScore();
+            if (highScoreText)
+            {
+                highScoreText.text = "Best score : " + bestScore.ToString();
+            }
+        }
 
-    public void SelectENG()
-    {
-        CharacterManager.instance.SelectCharacter(engineer);
-        StartGame();
-    }
+        public void SelectSWAT()
+        {
+            CharacterManager.instance.SelectCharacter(swat);
+            StartGame();
+        }
 
-    public void SelectHUNTER()
-    {
-        CharacterManager.instance.SelectCharacter(hunter);
-        StartGame();
-    }
+        public void SelectTANK()
+        {
+            CharacterManager.instance.SelectCharacter(tank);
+            StartGame();
+        }
 
-    void StartGame()
-    {
-        SceneManager.LoadScene("GameScene");
-    }
+        public void SelectENG()
+        {
+            CharacterManager.instance.SelectCharacter(engineer);
+            StartGame();
+        }
 
-    public void QuitGame() {
-        Application.Quit(); 
+        public void SelectHUNTER()
+        {
+            CharacterManager.instance.SelectCharacter(hunter);
+            StartGame();
+        }
+
+        void StartGame()
+        {
+            SceneManager.LoadScene("GameScene");
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }

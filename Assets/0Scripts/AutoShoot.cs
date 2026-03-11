@@ -1,71 +1,85 @@
 using UnityEngine;
 
-public class AutoShoot : MonoBehaviour
+namespace CrystalMind
 {
-    public GameObject bulletPrefab;
-
-    public Transform firePoint;
-
-    public float fireRange = 10f;
-    public float fireRate = 1f;
-    public float rotateSpeed = 8f;
-    public float shootAngleThreshold = 10f;
-
-    public AudioSource audioSource;
-    public AudioClip shootSFX;
-
-    float timer;
-
-    void Update()
+    public class AutoShoot : MonoBehaviour
     {
-        timer += Time.deltaTime;
+        public GameObject bulletPrefab;
 
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        public Transform firePoint;
 
-        GameObject closest = null;
-        float minDist = fireRange;
+        public float fireRate = 1f;
 
-        foreach (GameObject e in enemies)
+        public float range = 15f;
+
+        public int attack = 10;
+
+        float timer;
+
+        void Update()
         {
-            float d = Vector3.Distance(transform.position, e.transform.position);
+            GameObject target = FindNearestEnemy();
 
-            if (d < minDist)
+            if (target != null)
             {
-                minDist = d;
-                closest = e;
+                Vector3 dir = target.transform.position - transform.position;
+
+                dir.y = 0;
+
+                if (dir != Vector3.zero)
+                {
+                    transform.rotation = Quaternion.LookRotation(dir);
+                }
+
+                timer += Time.deltaTime;
+
+                if (timer >= fireRate)
+                {
+                    Shoot();
+                    timer = 0f;
+                }
             }
         }
 
-        if (closest != null)
+        void Shoot()
         {
-            Vector3 dir = closest.transform.position - transform.position;
-            dir.y = 0f;
+            if (bulletPrefab == null || firePoint == null)
+                return;
 
-            Quaternion targetRotation = Quaternion.LookRotation(dir);
-
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                targetRotation,
-                rotateSpeed * Time.deltaTime
+            GameObject bulletObj = Instantiate(
+                bulletPrefab,
+                firePoint.position,
+                firePoint.rotation
             );
 
-            float angle = Vector3.Angle(transform.forward, dir);
+            Bullet bullet = bulletObj.GetComponent<Bullet>();
 
-            if (angle < shootAngleThreshold && timer >= fireRate)
+            if (bullet != null)
             {
-                timer = 0;
-
-                if (shootSFX != null)
-                {
-                    audioSource.PlayOneShot(shootSFX);
-                }
-
-                Instantiate(
-                    bulletPrefab,
-                    firePoint.position,
-                    firePoint.rotation
-                );
+                bullet.SetDamage(attack);
             }
+        }
+
+        GameObject FindNearestEnemy()
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            float minDist = range;
+
+            GameObject nearest = null;
+
+            foreach (GameObject e in enemies)
+            {
+                float dist = Vector3.Distance(transform.position, e.transform.position);
+
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    nearest = e;
+                }
+            }
+
+            return nearest;
         }
     }
 }

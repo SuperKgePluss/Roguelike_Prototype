@@ -1,85 +1,119 @@
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
-public class UpgradeManager : MonoBehaviour
+namespace CrystalMind
 {
-    public static UpgradeManager instance;
-
-    void Awake()
+    public class UpgradeManager : MonoBehaviour
     {
-        instance = this;
-    }
+        public static UpgradeManager instance;
 
-    void Update()
-    {
-        if (Time.timeScale == 0)
+        public List<UpgradeOption> upgradePool = new List<UpgradeOption>();
+
+        public List<UpgradeOption> currentChoices = new List<UpgradeOption>();
+
+        void Awake()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                ApplyUpgrade(1);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                ApplyUpgrade(2);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                ApplyUpgrade(3);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                ApplyUpgrade(4);
-            }
-        }
-    }
-
-    public void ShowUpgrade()
-    {
-        Time.timeScale = 0f;
-
-        UIManager._instance.ShowUpgradeUI();
-    }
-
-    public void ResumeGame()
-    {
-        Time.timeScale = 1f;
-    }
-
-    void ApplyUpgrade(int id)
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        if (id == 1)
-        {
-            player.GetComponent<AutoShoot>().fireRate -= 0.1f;
+            instance = this;
         }
 
-        if (id == 2)
+        public void ShowUpgrade()
         {
-            player.GetComponent<PlayerMovement>().moveSpeed += 1f;
-        }
+            BuildPool();
 
-        if (id == 3)
-        {
-            player.GetComponent<PlayerHealth>().maxHealth += 1;
-        }
+            List<UpgradeOption> available =
+                upgradePool.Where(x => !x.IsMax()).ToList();
 
-        if (id == 4)
-        {
-            AbilityController[] controllers = FindObjectsOfType<AbilityController>();
+            if (available.Count == 0)
+                return;
 
-            foreach (var ac in controllers)
+            if (available.Count <= 4)
             {
-                foreach (var ability in ac.abilities)
+                currentChoices = available;
+            }
+            else
+            {
+                currentChoices =
+                    available.OrderBy(x => Random.value).Take(4).ToList();
+            }
+
+            Time.timeScale = 0f;
+
+            UIManager._instance.ShowUpgradeUI(currentChoices);
+        }
+
+        void BuildPool()
+        {
+            List<UpgradeOption> previous = new List<UpgradeOption>(upgradePool);
+
+            upgradePool.Clear();
+
+            GameObject leader = GameObject.FindGameObjectWithTag("Player");
+
+            List<GameObject> characters = new List<GameObject>();
+
+            characters.Add(leader);
+
+            GameObject[] allies = GameObject.FindGameObjectsWithTag("Ally");
+
+            characters.AddRange(allies);
+
+            foreach (GameObject c in characters)
+            {
+                // ATK upgrade
+                UpgradeOption atk = new UpgradeOption();
+
+                atk.type = UpgradeType.CharacterATK;
+
+                atk.SetupCharacter(c);
+
+                RestoreLevel(atk, previous);
+
+                upgradePool.Add(atk);
+
+                AbilityController ac = c.GetComponent<AbilityController>();
+
+                if (ac != null)
                 {
-                    ability.LevelUp();
+                    foreach (AutoAbility a in ac.runtimeAbilities)
+                    {
+                        UpgradeOption ab = new UpgradeOption();
+
+                        ab.type = UpgradeType.Ability;
+
+                        ab.SetupAbility(c, a);
+
+                        RestoreLevel(ab, previous);
+
+                        upgradePool.Add(ab);
+                    }
                 }
             }
         }
 
-        UIManager._instance.HideUpgradeUI();
-        ResumeGame();
+        void RestoreLevel(UpgradeOption option, List<UpgradeOption> previous)
+        {
+            UpgradeOption old =
+                previous.FirstOrDefault(x =>
+                    x.characterName == option.characterName &&
+                    x.displayName == option.displayName);
+
+            if (old != null)
+            {
+                option.level = old.level;
+            }
+        }
+
+        public void SelectUpgrade(int index)
+        {
+            if (index >= currentChoices.Count)
+                return;
+
+            currentChoices[index].Apply();
+
+            UIManager._instance.HideUpgradeUI();
+
+            Time.timeScale = 1f;
+        }
     }
 }

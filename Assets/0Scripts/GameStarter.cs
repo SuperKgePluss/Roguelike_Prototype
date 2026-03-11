@@ -1,22 +1,33 @@
+using System.Collections;
 using UnityEngine;
 
-public class GameStarter : MonoBehaviour
+namespace CrystalMind
 {
-    void Start()
+    public class GameStarter : MonoBehaviour
     {
-        var teamLeader = Instantiate(
-            CharacterManager.instance.selectedCharacterPrefab,
-            Vector3.zero,
-            Quaternion.identity
-        );
+        GameObject teamLeader;
 
-        var squadManager = FindObjectOfType<SquadManager>();
+        void Start()
+        {
+            teamLeader = Instantiate(
+                CharacterManager.instance.selectedCharacterPrefab,
+                Vector3.zero,
+                Quaternion.identity
+            );
 
-        squadManager.leader = teamLeader.transform;
-        squadManager.RemoveLeader(
-            CharacterManager.instance.selectedCharacterPrefab
-        );
+            FindObjectOfType<CameraFollow>().player = teamLeader.transform;
 
-        FindObjectOfType<CameraFollow>().player = teamLeader.transform;
+            StartCoroutine(DelayDeleteLeader());
+        }
+        IEnumerator DelayDeleteLeader()
+        {
+            var squadManager = FindObjectOfType<SquadManager>();
+
+            yield return new WaitUntil(() => squadManager.availableSquads.Count > 0);
+            squadManager.leader = teamLeader.transform;
+            squadManager.RemoveLeader(
+                CharacterManager.instance.selectedCharacterPrefab
+            );
+        }
     }
 }

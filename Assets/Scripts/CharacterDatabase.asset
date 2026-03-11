@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba9b479e25c1364a88f3485391601d2, type: 3}
+  m_Name: CharacterDatabase
+  m_EditorClassIdentifier: 
+  characters:
+  - id: 0
+    characterName: SWAT
+    description: 
+    portrait: {fileID: 21300000, guid: 9d162aed6dafbc9479c9b416e6012252, type: 3}
+    level: 0
+    role: 
+    isLocked: 0
+    stats:
+      weapons: []
+      abilities: []
+      synergies: []
+  - id: 1
+    characterName: TANK
+    description: 
+    portrait: {fileID: 21300000, guid: c10afc7944e0b5144bee506edc2d7bea, type: 3}
+    level: 0
+    role: 
+    isLocked: 0
+    stats:
+      weapons: []
+      abilities: []
+      synergies: []
+  - id: 2
+    characterName: ENGINEER
+    description: 
+    portrait: {fileID: 21300000, guid: d7bed37d8f30e514d86a1e0f4440f870, type: 3}
+    level: 0
+    role: 
+    isLocked: 0
+    stats:
+      weapons: []
+      abilities: []
+      synergies: []
+  - id: 3
+    characterName: HUNTER
+    description: 
+    portrait: {fileID: 21300000, guid: 7fd6d8e747276d643a50bfdf43c78fc9, type: 3}
+    level: 0
+    role: 
+    isLocked: 0
+    stats:
+      weapons: []
+      abilities: []
+      synergies: []

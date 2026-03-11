@@ -1,27 +1,30 @@
 using UnityEngine;
 
-public class CharacterManager : MonoBehaviour
+namespace CrystalMind
 {
-    public static CharacterManager instance;
-
-    public CharacterData selectedCharacter;
-    public GameObject selectedCharacterPrefab;
-
-    void Awake()
+    public class CharacterManager : MonoBehaviour
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+        public static CharacterManager instance;
 
-    public void SelectCharacter(GameObject prefab)
-    {
-        selectedCharacterPrefab = prefab;
+        public CharacterData selectedCharacter;
+        public GameObject selectedCharacterPrefab;
+
+        void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        public void SelectCharacter(GameObject prefab)
+        {
+            selectedCharacterPrefab = prefab;
+        }
     }
 }

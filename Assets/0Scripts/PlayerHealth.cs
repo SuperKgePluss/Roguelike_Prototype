@@ -1,41 +1,45 @@
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+namespace CrystalMind
 {
-    public int maxHealth = 5;
-    private int currentHealth;
-    public bool isDead = false;
-
-    void Start()
+    public class PlayerHealth : MonoBehaviour
     {
-        currentHealth = maxHealth;
-    }
+        public int maxHealth = 5;
+        private int currentHealth;
+        public bool isDead = false;
 
-    public void TakeDamage(int damage)
-    {
-        if (isDead) return;
-
-        currentHealth -= damage;
-        Debug.Log("Player HP: " + currentHealth);
-        UIManager._instance.UpdateHP(currentHealth);
-
-        if (currentHealth <= 0)
+        void Start()
         {
-            Debug.Log("GAME OVER");
-            isDead = true;
-            GameManager.instance.GameOver();
-        }
-    }
-
-    public void Heal(int amount)
-    {
-        if (isDead) return;
-
-        currentHealth += amount;
-
-        if (currentHealth > maxHealth)
             currentHealth = maxHealth;
+            UIManager._instance.UpdateHP(currentHealth, maxHealth);
+        }
 
-        UIManager._instance.UpdateHP(currentHealth);
+        public void TakeDamage(int damage)
+        {
+            if (isDead) return;
+
+            currentHealth -= damage;
+            Debug.Log("Player HP: " + currentHealth);
+            UIManager._instance.UpdateHP(currentHealth, maxHealth);
+
+            if (currentHealth <= 0)
+            {
+                Debug.Log("GAME OVER");
+                isDead = true;
+                GameManager.instance.GameOver();
+            }
+        }
+
+        public void Heal(int amount)
+        {
+            if (isDead) return;
+
+            currentHealth += amount;
+
+            if (currentHealth > maxHealth)
+                currentHealth = maxHealth;
+
+            UIManager._instance.UpdateHP(currentHealth, maxHealth);
+        }
     }
 }

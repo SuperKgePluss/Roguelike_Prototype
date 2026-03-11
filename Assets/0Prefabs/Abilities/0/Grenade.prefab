@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 819895284431887897}
   - component: {fileID: 4687595095338750471}
   - component: {fileID: 3583084609286735887}
-  - component: {fileID: 8422434341899328601}
+  - component: {fileID: 264133329676697712}
+  - component: {fileID: 6863492506054525428}
   m_Layer: 0
   m_Name: Grenade
   m_TagString: Untagged
@@ -88,7 +89,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8422434341899328601
+--- !u!114 &264133329676697712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,11 +98,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4176732893712732930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12139af3f082d014caea4bc0a7e42564, type: 3}
+  m_Script: {fileID: 11500000, guid: d464ba8b26b61c24b9500b9d4ccac3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
-  damage: 5
+  followOwner: 0
+--- !u!114 &6863492506054525428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4176732893712732930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c55cb5134528048ae72c1113ce3762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 5
+  damage: 200
+  lifeTime: 0.2
 --- !u!1001 &8456369898768986069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,6 +168,10 @@ PrefabInstance:
     - target: {fileID: 6759794185557706511, guid: 3dd50886582244645be87adb42aa8528, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904114409888472623, guid: 3dd50886582244645be87adb42aa8528, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

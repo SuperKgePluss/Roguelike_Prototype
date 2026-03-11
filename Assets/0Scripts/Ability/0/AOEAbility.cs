@@ -1,25 +1,37 @@
 using UnityEngine;
 
-public class AOEAbility : MonoBehaviour
+namespace CrystalMind
 {
-    public float radius = 5f;
-    public int damage = 5;
-
-    void Start()
+    public class AOEAbility : MonoBehaviour
     {
-        Collider[] hits = Physics.OverlapSphere(
-            transform.position,
-            radius
-        );
+        public float radius = 5f;
+        public int damage = 5;
 
-        foreach (var hit in hits)
+        public float lifeTime = 5f;
+
+        void Start()
         {
-            if (hit.CompareTag("Enemy"))
+            Collider[] hits = Physics.OverlapSphere(
+                transform.position,
+                radius
+            );
+
+            foreach (var hit in hits)
             {
-                hit.GetComponent<Enemy>().TakeDamage(damage);
+                if (hit.CompareTag("Enemy"))
+                {
+                    hit.GetComponent<Enemy>().TakeDamage(damage);
+                }
             }
+
+            Destroy(gameObject, lifeTime);
         }
 
-        Destroy(gameObject, 0.2f);
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellow;
+
+            Gizmos.DrawWireSphere(transform.position, radius);
+        }
     }
 }

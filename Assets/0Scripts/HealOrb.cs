@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class HealOrb : MonoBehaviour
+namespace CrystalMind
 {
-    public int healAmount = 1;
-
-    void OnTriggerEnter(Collider other)
+    public class HealOrb : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        public int healAmount = 1;
+
+        void OnTriggerEnter(Collider other)
         {
-            PlayerHealth ph = other.GetComponent<PlayerHealth>();
-
-            if (ph != null)
+            if (other.CompareTag("Player"))
             {
-                ph.Heal(healAmount);
-            }
+                PlayerHealth ph = other.GetComponent<PlayerHealth>();
 
-            Destroy(gameObject);
+                if (ph != null)
+                {
+                    ph.Heal(healAmount);
+                }
+
+                Destroy(gameObject);
+            }
         }
     }
 }

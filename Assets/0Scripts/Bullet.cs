@@ -1,26 +1,40 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+namespace CrystalMind
 {
-    public float speed = 10f;
-    public float lifeTime = 3f;
-    public int damage = 1;
-
-    void Start()
+    public class Bullet : MonoBehaviour
     {
-        Destroy(gameObject, lifeTime);
-    }
+        public int damage;
 
-    void Update()
-    {
-        transform.position += transform.forward * speed * Time.deltaTime;
-    }
+        public float speed = 10f;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy")) {
-            other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-            Destroy(gameObject);
+        public float lifeTime = 3f;
+
+        void Start()
+        {
+            Destroy(gameObject, lifeTime);
+        }
+
+        void Update()
+        {
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
+
+        public void SetDamage(int value)
+        {
+            damage = value;
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+
+                Destroy(gameObject);
+            }
         }
     }
 }

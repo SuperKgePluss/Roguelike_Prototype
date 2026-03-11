@@ -1,17 +1,20 @@
 using UnityEngine;
 
-public class CharacterLoader : MonoBehaviour
+namespace CrystalMind
 {
-    void Start()
+    public class CharacterLoader : MonoBehaviour
     {
-        CharacterData data = CharacterManager.instance.selectedCharacter;
+        void Start()
+        {
+            CharacterData data = CharacterManager.instance.selectedCharacter;
 
-        if (data == null) return;
+            if (data == null) return;
 
-        GetComponent<PlayerMovement>().moveSpeed = data.moveSpeed;
-        GetComponent<PlayerHealth>().maxHealth = data.maxHP;
-        GetComponent<AutoShoot>().fireRate = data.fireRate;
+            GetComponent<PlayerMovement>().moveSpeed = data.moveSpeed;
+            GetComponent<PlayerHealth>().maxHealth = data.maxHP;
+            GetComponent<AutoShoot>().fireRate = data.fireRate;
 
-        GetComponent<Renderer>().material.color = data.characterColor;
+            GetComponent<Renderer>().material.color = data.characterColor;
+        }
     }
 }

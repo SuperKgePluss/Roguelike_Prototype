@@ -1,33 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+namespace CrystalMind
 {
-    public static GameManager instance;
-
-    public int score = 0;
-
-    void Awake()
+    public class GameManager : MonoBehaviour
     {
-        instance = this;
-    }
+        public static GameManager instance;
 
-    public void AddScore(int value)
-    {
-        score += value;
+        public int score = 0;
 
-        UIManager._instance.UpdateScore(score);
-    }
+        public List<AutoAbility> allAbilities = new List<AutoAbility>();
 
-    public void GameOver() {
-        UIManager._instance.ShowGameOver();
-
-        SaveManager save = FindObjectOfType<SaveManager>();
-
-        int best = save.LoadScore();
-
-        if (score > best)
+        void Awake()
         {
-            save.SaveScore(score);
+            instance = this;
+        }
+
+        public void AddScore(int value)
+        {
+            score += value;
+
+            UIManager._instance.UpdateScore(score);
+        }
+
+        public void GameOver()
+        {
+            UIManager._instance.ShowGameOver();
+
+            SaveManager save = FindObjectOfType<SaveManager>();
+
+            int best = save.LoadScore();
+
+            if (score > best)
+            {
+                save.SaveScore(score);
+            }
+
+            StartCoroutine(DelayToMenu());
+        }
+
+        IEnumerator DelayToMenu()
+        {
+            yield return new WaitForSeconds(3f);
+            SceneManager.LoadScene("Menu");
         }
     }
 }

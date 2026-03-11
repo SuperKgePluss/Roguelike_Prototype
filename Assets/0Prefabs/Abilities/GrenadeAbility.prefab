@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7258526224859216170}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -121,9 +121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64a32177381f294ab935fd52265683e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 1
+  cooldown: 17
   level: 1
   maxLevel: 4
   abilityPrefab: {fileID: 4176732893712732930, guid: 5364c22556e68694181db9b2a8458ca6, type: 3}
-  range: 8
+  damage: 200
+  range: 10
   count: 1
+  ownerTransform: {fileID: 0}
+  placeAtEnemy: 1

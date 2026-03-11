@@ -89,7 +89,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &1182198053619241804
 MonoBehaviour:
@@ -105,12 +105,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3959555488878961599, guid: ffef3e9047034ce4dac20ae3c3e15e37, type: 3}
   firePoint: {fileID: 3738863094323934433}
-  fireRange: 10
-  fireRate: 0.8
-  rotateSpeed: 8
-  shootAngleThreshold: 5
-  audioSource: {fileID: 886636198240781896}
-  shootSFX: {fileID: 0}
+  fireRate: 0.6
+  range: 15
+  attack: 10
 --- !u!114 &6066847764297454451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f261b1c7c4d042d4087fd1e3ab7092ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 700
   isDead: 0
 --- !u!114 &3733546027981270102
 MonoBehaviour:
@@ -137,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf7b9aecc5fdc54fbe0349b40eea292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 6
 --- !u!114 &8333475695762221830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities: []
+  runtimeAbilities: []
 --- !u!114 &5186820746577744159
 MonoBehaviour:
   m_ObjectHideFlags: 0

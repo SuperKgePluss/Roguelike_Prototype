@@ -1,54 +1,67 @@
 using UnityEngine;
 
-public class PlayerLevel : MonoBehaviour
+namespace CrystalMind
 {
-    public int level = 1;
-
-    public int currentExp = 0;
-    public int expToNext = 10;
-
-    public void AddExp(int amount)
+    public class PlayerLevel : MonoBehaviour
     {
-        currentExp += amount;
-        UpdateEXP(currentExp);
+        public int level = 1;
 
-        if (currentExp >= expToNext)
+        public int currentExp = 0;
+
+        public int expToNext = 10;
+
+        [Header("Follower")]
+        public int SquadSpawnLevel2nd = 3;
+        public int SquadSpawnLevel3rd = 5;
+        public int SquadSpawnLevel4th = 7;
+
+        public void AddExp(int amount)
         {
-            LevelUp();
+            currentExp += amount;
 
-            if (level == 2)
-            {
-                FindObjectOfType<SquadManager>().SpawnMember(new Vector3(2, 0, 0));
-            }
+            UpdateEXP(currentExp);
 
-            if (level == 4)
+            if (currentExp >= expToNext)
             {
-                FindObjectOfType<SquadManager>().SpawnMember(new Vector3(-2, 0, 0));
-            }
+                LevelUp();
 
-            if (level == 6)
-            {
-                FindObjectOfType<SquadManager>().SpawnMember(new Vector3(0, 0, 2));
+                if (level == SquadSpawnLevel2nd)
+                {
+                    FindObjectOfType<SquadManager>().SpawnMember(new Vector3(2, 0, 0));
+                }
+
+                if (level == SquadSpawnLevel3rd)
+                {
+                    FindObjectOfType<SquadManager>().SpawnMember(new Vector3(-2, 0, 0));
+                }
+
+                if (level == SquadSpawnLevel4th)
+                {
+                    FindObjectOfType<SquadManager>().SpawnMember(new Vector3(0, 0, 2));
+                }
             }
         }
-    }
 
-    void LevelUp()
-    {
-        level++;
-        UIManager._instance.UpdateLV(level);
+        void LevelUp()
+        {
+            level++;
 
-        currentExp = 0;
-        UpdateEXP(currentExp);
-        expToNext += 5;
+            UIManager._instance.UpdateLV(level);
 
-        Debug.Log("LEVEL UP : " + level);
+            currentExp = 0;
 
-        UpgradeManager.instance.ShowUpgrade();
-    }
+            UpdateEXP(currentExp);
 
-    void UpdateEXP(int currentEXP)
-    {
-        UIManager._instance.UpdateEXP(currentEXP);
+            expToNext += 5;
+
+            Debug.Log("LEVEL UP : " + level);
+
+            UpgradeManager.instance.ShowUpgrade();
+        }
+
+        void UpdateEXP(int currentEXP)
+        {
+            UIManager._instance.UpdateEXP(currentEXP);
+        }
     }
 }

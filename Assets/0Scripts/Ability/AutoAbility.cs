@@ -1,12 +1,19 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AutoAbility : Ability
 {
     public GameObject abilityPrefab;
 
+    public int damage = 1;
+
     public float range = 8f;
 
     public int count = 1;
+
+    public Transform ownerTransform;
+
+    public bool placeAtEnemy = false;
 
     protected override void Activate()
     {
@@ -36,15 +43,18 @@ public class AutoAbility : Ability
         {
             GameObject ability = Instantiate(
                 abilityPrefab,
-                transform.position,
-                Quaternion.identity
+                placeAtEnemy ? closest.transform.position: ownerTransform.position,
+                ownerTransform.rotation
             );
 
-            ability.SendMessage(
-                "SetOwner",
-                transform,
-                SendMessageOptions.DontRequireReceiver
-            );
+            var ab = ability.GetComponent<AbilityPosition>();
+            ab.SetOwner(ownerTransform);
+
+            //ability.SendMessage(
+            //    "SetOwner",
+            //    transform,
+            //    SendMessageOptions.DontRequireReceiver
+            //);
         }
     }
 }

@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class MagnetOrb : MonoBehaviour
+namespace CrystalMind
 {
-    void OnTriggerEnter(Collider other)
+    public class MagnetOrb : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        void OnTriggerEnter(Collider other)
         {
-            ExpOrb[] orbs = FindObjectsOfType<ExpOrb>();
-
-            foreach (ExpOrb orb in orbs)
+            if (other.CompareTag("Player"))
             {
-                orb.magnetized = true;
-            }
+                ExpOrb[] orbs = FindObjectsOfType<ExpOrb>();
 
-            Destroy(gameObject);
+                foreach (ExpOrb orb in orbs)
+                {
+                    orb.magnetized = true;
+                }
+
+                Destroy(gameObject);
+            }
         }
     }
 }
