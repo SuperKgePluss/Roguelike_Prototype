@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace CrystalMind
@@ -8,9 +9,11 @@ namespace CrystalMind
         public int damage = 5;
 
         public float lifeTime = 5f;
+        public float delay = 0.1f;
 
-        void Start()
+        IEnumerator Start()
         {
+            yield return new WaitForSeconds(delay);
             Collider[] hits = Physics.OverlapSphere(
                 transform.position,
                 radius

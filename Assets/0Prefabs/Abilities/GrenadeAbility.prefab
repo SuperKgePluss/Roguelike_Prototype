@@ -130,3 +130,7 @@ MonoBehaviour:
   count: 1
   ownerTransform: {fileID: 0}
   placeAtEnemy: 1
+  useArcProjectile: 1
+  projectileHeight: 3
+  projectileDuration: 0.6
+  projectileScale: 0.3

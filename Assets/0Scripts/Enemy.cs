@@ -42,7 +42,7 @@ namespace CrystalMind
             PlayerHealth[] allPlayer = FindObjectsOfType<PlayerHealth>();
             targetPlayer = allPlayer[Random.Range(0, allPlayer.Length - 1)].transform;
 
-            SetupEnemy();
+            //SetupEnemy();
         }
 
         void Update()
