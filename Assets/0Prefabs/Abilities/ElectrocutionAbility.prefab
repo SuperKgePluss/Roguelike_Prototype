@@ -133,4 +133,5 @@ MonoBehaviour:
   useArcProjectile: 1
   projectileHeight: 3
   projectileDuration: 0.6
-  projectileScale: 1
+  projectileScale: 0.5
+  thrownAbleObject: {fileID: 100000, guid: 6b4869b7dd7f8cf4f874ae442836c6fc, type: 3}

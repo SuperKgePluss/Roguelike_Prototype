@@ -1,3 +1,4 @@
+using CrystalMind;
 using UnityEngine;
 
 public class SquadFollower : MonoBehaviour
@@ -5,9 +6,12 @@ public class SquadFollower : MonoBehaviour
     public Transform leader;
     public Vector3 offset;
     public float followSpeed = 5f;
+    public Animator characterAnimator;
 
     void Update()
     {
+        if (GameManager.instance.isGameOver) return;
+
         if (leader == null) return;
 
         Vector3 targetPos = leader.position + offset;

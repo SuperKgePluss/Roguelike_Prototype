@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace CrystalMind
 {
@@ -24,6 +25,7 @@ namespace CrystalMind
         public GameObject upgradePanel;
 
         public UpgradeButtonUI[] upgradeButtons;
+        Coroutine hpFlashRoutine;
 
         void Awake()
         {
@@ -52,10 +54,33 @@ namespace CrystalMind
 
         public void UpdateHP(float current, float max)
         {
-            if (hpText != null)
+            if (hpText == null) return;
+
+            hpText.text = "HP : " + current + " / " + max;
+
+            if (hpFlashRoutine != null)
+                StopCoroutine(hpFlashRoutine);
+
+            hpFlashRoutine = StartCoroutine(FlashHP());
+        }
+
+        IEnumerator FlashHP()
+        {
+            hpText.color = Color.red;
+
+            float t = 0f;
+            float duration = 0.4f;
+
+            while (t < duration)
             {
-                hpText.text = "HP : " + current + " / " + max;
+                t += Time.deltaTime;
+
+                hpText.color = Color.Lerp(Color.red, Color.white, t / duration);
+
+                yield return null;
             }
+
+            hpText.color = Color.white;
         }
 
         // -------------------------

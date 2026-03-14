@@ -47,6 +47,8 @@ namespace CrystalMind
 
         void Update()
         {
+            if (GameManager.instance.isGameOver) return;
+
             if (stunTimer > 0)
             {
                 stunTimer -= Time.deltaTime;

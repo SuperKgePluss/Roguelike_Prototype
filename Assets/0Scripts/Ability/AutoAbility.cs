@@ -23,6 +23,8 @@ public class AutoAbility : Ability
 
     public float projectileScale = 0.3f;
 
+    [SerializeField] private GameObject thrownAbleObject;
+
     protected override void Activate()
     {
         if (abilityPrefab == null) return;
@@ -53,7 +55,7 @@ public class AutoAbility : Ability
                 ? closest.transform.position
                 : ownerTransform.position;
 
-            if (useArcProjectile)
+            if (useArcProjectile && thrownAbleObject != null)
             {
                 SpawnArcProjectile(targetPos);
             }
@@ -80,16 +82,19 @@ public class AutoAbility : Ability
 
     void SpawnArcProjectile(Vector3 targetPos)
     {
-        GameObject proj = new GameObject("AbilityProjectile");
+        //GameObject proj = new GameObject("AbilityProjectile");
+
+        GameObject proj = Instantiate(thrownAbleObject);
+        proj.name = "AbilityProjectile";
 
         proj.transform.position = ownerTransform.position;
 
-        GameObject mesh = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        mesh.transform.SetParent(proj.transform);
-        mesh.transform.localPosition = Vector3.zero;
-        mesh.transform.localScale = Vector3.one * projectileScale;
+        //GameObject mesh = GameObject.CreatePrimitive(Pr);
+        proj.transform.SetParent(proj.transform);
+        proj.transform.localPosition = Vector3.zero;
+        proj.transform.localScale = Vector3.one * projectileScale;
 
-        Destroy(mesh.GetComponent<Collider>());
+        //Destroy(mesh.GetComponent<Collider>());
 
         ArcProjectile mover = proj.AddComponent<ArcProjectile>();
 

@@ -112,7 +112,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: ebb96c703224744479e6294bd49515d9, type: 3}
     - target: {fileID: 595867772017348018, guid: 83d002895e21eb9498fa4b4c387ba02d, type: 3}
       propertyPath: moveSpeed
-      value: 5.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 595867772017348018, guid: 83d002895e21eb9498fa4b4c387ba02d, type: 3}
       propertyPath: bossBullet

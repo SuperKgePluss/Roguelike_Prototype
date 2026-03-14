@@ -13,6 +13,8 @@ namespace CrystalMind
 
         public List<AutoAbility> allAbilities = new List<AutoAbility>();
 
+        public bool isGameOver = false;
+
         void Awake()
         {
             instance = this;
@@ -43,8 +45,9 @@ namespace CrystalMind
 
         IEnumerator DelayToMenu()
         {
+            isGameOver = true;
             yield return new WaitForSeconds(3f);
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }
