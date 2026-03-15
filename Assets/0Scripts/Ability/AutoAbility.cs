@@ -50,10 +50,16 @@ public class AutoAbility : Ability
         int spawnCount = count + (level - 1);
 
         for (int i = 0; i < spawnCount; i++)
-        {
+        { 
+            float spread = 1.2f;
+
+            Vector2 rnd = Random.insideUnitCircle * spread;
+
+            Vector3 spawnPos = ownerTransform.position + new Vector3(rnd.x, 0f, rnd.y);
+
             Vector3 targetPos = placeAtEnemy
                 ? closest.transform.position
-                : ownerTransform.position;
+                : spawnPos;
 
             if (useArcProjectile && thrownAbleObject != null)
             {

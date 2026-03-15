@@ -45,7 +45,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1182198053619241804, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
       propertyPath: attack
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1182198053619241804, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
       propertyPath: fireRate
@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 7850053822965269573}
     - target: {fileID: 1182198053619241804, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
       propertyPath: shootMode
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1182198053619241804, guid: 4c30db1dd5175f64582ff78a026edc43, type: 3}
       propertyPath: bulletPrefab

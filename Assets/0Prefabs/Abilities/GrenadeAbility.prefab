@@ -131,7 +131,7 @@ MonoBehaviour:
   ownerTransform: {fileID: 0}
   placeAtEnemy: 1
   useArcProjectile: 1
-  projectileHeight: 3
-  projectileDuration: 0.6
-  projectileScale: 0.5
+  projectileHeight: 3.5
+  projectileDuration: 1
+  projectileScale: 0.8
   thrownAbleObject: {fileID: 100000, guid: b084bde799502474eb1d8b1602b1533e, type: 3}
